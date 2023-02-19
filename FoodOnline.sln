@@ -5,11 +5,13 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApp", "WebApp", "{E0737A42-D44E-4DEF-A5E4-EFB4C3126F83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodOnline.Web", "WebApp\FoodOnline.Web\FoodOnline.Web.csproj", "{28DA80DD-EA04-44FF-BA99-0BDEEDC9801C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodOnline.Web", "WebApp\FoodOnline.Web\FoodOnline.Web.csproj", "{28DA80DD-EA04-44FF-BA99-0BDEEDC9801C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{6F895442-3C47-4658-AA7A-C4801EF2DD10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodOnline.Services.ProductAPI", "Services\FoodOnline.Services.ProductAPI\FoodOnline.Services.ProductAPI.csproj", "{83960C14-2D1D-4E6A-8DFF-3700A8ADACEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodOnline.Services.ProductAPI", "Services\FoodOnline.Services.ProductAPI\FoodOnline.Services.ProductAPI.csproj", "{83960C14-2D1D-4E6A-8DFF-3700A8ADACEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodOnline.Services.Identity", "Services\FoodOnline.Services.Identity\FoodOnline.Services.Identity.csproj", "{B084F019-1520-4F90-A16D-64CE1928316A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{83960C14-2D1D-4E6A-8DFF-3700A8ADACEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83960C14-2D1D-4E6A-8DFF-3700A8ADACEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83960C14-2D1D-4E6A-8DFF-3700A8ADACEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B084F019-1520-4F90-A16D-64CE1928316A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B084F019-1520-4F90-A16D-64CE1928316A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B084F019-1520-4F90-A16D-64CE1928316A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B084F019-1520-4F90-A16D-64CE1928316A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -32,6 +38,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{28DA80DD-EA04-44FF-BA99-0BDEEDC9801C} = {E0737A42-D44E-4DEF-A5E4-EFB4C3126F83}
 		{83960C14-2D1D-4E6A-8DFF-3700A8ADACEB} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
+		{B084F019-1520-4F90-A16D-64CE1928316A} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3F3DE7A-EEA5-4CA6-9C8C-518202D636FE}
