@@ -78,6 +78,7 @@ namespace FoodOnline.Services.ProductAPI.Controllers
             return _response;
         }
         [HttpDelete]
+        [Route("{id}")]
         public async Task<ResponseDto> Delete(int id)
         {
             try

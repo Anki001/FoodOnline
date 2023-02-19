@@ -30,7 +30,7 @@ namespace FoodOnline.Web.Services
             return await SendAsync<T>(new ApiRequest
             {
                 ApiType = ApiType.DELETE,
-                Url = Constants.ProductAPIBase + "/api/products" + productId,
+                Url = Constants.ProductAPIBase + "/api/products/" + productId,
                 AccessToken = string.Empty
             });
         }
@@ -50,7 +50,7 @@ namespace FoodOnline.Web.Services
             return await SendAsync<T>(new ApiRequest
             {
                 ApiType = ApiType.GET,
-                Url = Constants.ProductAPIBase + "/api/products" + productId,
+                Url = Constants.ProductAPIBase + "/api/products/" + productId,
                 AccessToken = string.Empty
             });
         }
