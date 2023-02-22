@@ -1,6 +1,32 @@
+using FoodOnline.Services.Identity.Common;
+using FoodOnline.Services.Identity.DBContexts;
+using FoodOnline.Services.Identity.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+var identityBuilder = builder.Services.AddIdentityServer(options =>
+{
+    options.Events.RaiseFailureEvents = true;
+    options.Events.RaiseErrorEvents = true;    
+    options.Events.RaiseInformationEvents = true;
+    options.Events.RaiseSuccessEvents = true;
+    options.EmitStaticAudienceClaim = true;
+}).AddInMemoryIdentityResources(Constants.IdentityResources)
+.AddInMemoryApiScopes(Constants.ApiScopes)
+.AddInMemoryClients(Constants.Clients)
+.AddAspNetIdentity<ApplicationUser>();
+
+identityBuilder.AddDeveloperSigningCredential();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -17,7 +43,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+// Add identity server to pipeline
+app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapControllerRoute(
