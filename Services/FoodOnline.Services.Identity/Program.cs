@@ -1,5 +1,7 @@
 using FoodOnline.Services.Identity.Common;
 using FoodOnline.Services.Identity.DBContexts;
+using FoodOnline.Services.Identity.Initializer;
+using FoodOnline.Services.Identity.Initializer.Interfaces;
 using FoodOnline.Services.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +27,8 @@ var identityBuilder = builder.Services.AddIdentityServer(options =>
 .AddInMemoryClients(Constants.Clients)
 .AddAspNetIdentity<ApplicationUser>();
 
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
 identityBuilder.AddDeveloperSigningCredential();
 
 builder.Services.AddControllersWithViews();
@@ -46,9 +50,16 @@ app.UseRouting();
 // Add identity server to pipeline
 app.UseIdentityServer();
 app.UseAuthorization();
-
+SeedDatabase();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void SeedDatabase()
+{
+    using var scope = app.Services.CreateScope();
+    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+    dbInitializer.Initialize();
+}
