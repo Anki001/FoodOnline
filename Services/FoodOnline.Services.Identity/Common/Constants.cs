@@ -33,8 +33,8 @@ namespace FoodOnline.Services.Identity.Common
                 ClientId = "foodonline",
                 ClientSecrets = { new Secret("secret".Sha256())},
                 AllowedGrantTypes = GrantTypes.Code,
-                RedirectUris = { "htps://localhost:44309/signin-oidc" },
-                PostLogoutRedirectUris = { "https://localhost:44309/signout-callback-oidc" },
+                RedirectUris = { "https://localhost:7069/signin-oidc" },
+                PostLogoutRedirectUris = { "https://localhost:7069/signout-callback-oidc" },
                 AllowedScopes = new List<string> {
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
