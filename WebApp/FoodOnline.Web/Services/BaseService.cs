@@ -2,6 +2,7 @@
 using FoodOnline.Web.Models;
 using FoodOnline.Web.Services.Interfaces;
 using Newtonsoft.Json;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace FoodOnline.Web.Services
@@ -32,6 +33,11 @@ namespace FoodOnline.Web.Services
                 {
                     httpMessage.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data),
                         Encoding.UTF8, "application/json");
+                }
+
+                if (!string.IsNullOrEmpty(apiRequest.AccessToken))
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.AccessToken);
                 }
 
                 HttpResponseMessage apiResponse = null;

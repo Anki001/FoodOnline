@@ -1,8 +1,10 @@
+using Duende.IdentityServer.Services;
 using FoodOnline.Services.Identity.Common;
 using FoodOnline.Services.Identity.DBContexts;
 using FoodOnline.Services.Identity.Initializer;
 using FoodOnline.Services.Identity.Initializer.Interfaces;
 using FoodOnline.Services.Identity.Models;
+using FoodOnline.Services.Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +30,7 @@ var identityBuilder = builder.Services.AddIdentityServer(options =>
 .AddAspNetIdentity<ApplicationUser>();
 
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 
 identityBuilder.AddDeveloperSigningCredential();
 
