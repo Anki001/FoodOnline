@@ -17,8 +17,7 @@ namespace FoodOnline.Services.ProductAPI.Controllers
             _productRepository = productRepository;
         }
         
-        [HttpGet]
-        [Authorize]
+        [HttpGet]        
         public async Task<ResponseDto> Get()
         {
             try
@@ -33,8 +32,7 @@ namespace FoodOnline.Services.ProductAPI.Controllers
             }
             return _response;
         }
-        [HttpGet]
-        [Authorize]
+        [HttpGet]        
         [Route("{id}")]
         public async Task<ResponseDto> Get(int id)
         {
