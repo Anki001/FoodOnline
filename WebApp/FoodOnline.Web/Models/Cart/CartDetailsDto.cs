@@ -1,4 +1,6 @@
-﻿namespace FoodOnline.Web.Models.Cart
+﻿using FoodOnline.Web.Models.Product;
+
+namespace FoodOnline.Web.Models.Cart
 {
     public class CartDetailsDto
     {
