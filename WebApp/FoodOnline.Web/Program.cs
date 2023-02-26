@@ -1,13 +1,19 @@
 using FoodOnline.Web.Common;
 using FoodOnline.Web.Services;
 using FoodOnline.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddHttpClient<IProductService, ProductService>();
+builder.Services.AddHttpClient<IShopingCartService, ShopingCartService>();
+
 Constants.ProductAPIBase = builder.Configuration["ServiceUrls:ProductAPI"];
+Constants.ShopingCartAPIBase = builder.Configuration["ServiceUrls:ShopingCartAPI"];
+
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IShopingCartService, ShopingCartService>();
 
 builder.Services.AddControllersWithViews();
 
@@ -25,6 +31,10 @@ builder.Services.AddAuthentication(options =>
         options.ClientSecret = "secret";
         options.ResponseType = "code";
 
+        // UserId and Role claim does not exists in users claims
+        options.ClaimActions.MapJsonKey("role", "role", "role");
+        options.ClaimActions.MapJsonKey("sub", "sub", "sub");
+        
         options.TokenValidationParameters.NameClaimType = "name";
         options.TokenValidationParameters.RoleClaimType = "role";
         options.Scope.Add("foodonline");

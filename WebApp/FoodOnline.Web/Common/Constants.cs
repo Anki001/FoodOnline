@@ -3,6 +3,6 @@
     public static class Constants
     {
         public static string ProductAPIBase { get; set; }
-
+        public static string ShopingCartAPIBase { get; set; }
     }
 }
