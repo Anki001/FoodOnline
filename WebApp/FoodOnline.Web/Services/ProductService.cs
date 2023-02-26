@@ -1,6 +1,7 @@
 ﻿using FoodOnline.Web.Common;
 using FoodOnline.Web.Common.Enums;
 using FoodOnline.Web.Models;
+using FoodOnline.Web.Models.Product;
 using FoodOnline.Web.Services.Interfaces;
 
 namespace FoodOnline.Web.Services

@@ -1,4 +1,4 @@
-﻿using FoodOnline.Web.Models;
+﻿using FoodOnline.Web.Models.Product;
 
 namespace FoodOnline.Web.Services.Interfaces
 {

@@ -1,4 +1,5 @@
 ﻿using FoodOnline.Web.Models;
+using FoodOnline.Web.Models.Product;
 using FoodOnline.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
