@@ -26,7 +26,7 @@ namespace FoodOnline.Web.Services
             });
         }
 
-        public async Task<T> GetCartByUserIdAsync<T>(int userId, string token = null)
+        public async Task<T> GetCartByUserIdAsync<T>(string userId, string token = null)
         {
             return await SendAsync<T>(new ApiRequest
             {
