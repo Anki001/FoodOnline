@@ -24,6 +24,32 @@ namespace FoodOnline.Web.Controllers
             return View(await GetCartDtoForLoggedinUser());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> ApplyCoupon(CartDto cartDto)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _shopingCartService.ApplyCouponAsync<ResponseDto>(cartDto, accessToken);
+
+            if (response is not null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveCoupon(CartDto cartDto)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _shopingCartService.RemoveCouponAsync<ResponseDto>(cartDto.CartHeader.UserId, accessToken);
+
+            if (response is not null && response.IsSuccess)
+            {
+                return RedirectToAction(nameof(CartIndex));
+            }
+            return View();
+        }
+
         public async Task<IActionResult> Remove(int cartDetailsId)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");

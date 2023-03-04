@@ -1,4 +1,4 @@
-﻿using FoodOnline.Services.ShopingCartAPI.Models.Dtos;
+﻿    using FoodOnline.Services.ShopingCartAPI.Models.Dtos;
 
 namespace FoodOnline.Services.ShopingCartAPI.Repository.Interfaces
 {
@@ -7,6 +7,8 @@ namespace FoodOnline.Services.ShopingCartAPI.Repository.Interfaces
         Task<CartDto> GetCartByUserIdAsync(string userId);
         Task<CartDto> CreateUpdateCartAsync(CartDto cartDto);
         Task<bool> RemoveFromCartAsync(int cartDetailsId);
+        Task<bool> ApplyCouponeAsync(string userId, string couponCode);
+        Task<bool> RemoveCouponAsync(string userId);
         Task<bool> ClearCartAsync(string userId);
     }
 }

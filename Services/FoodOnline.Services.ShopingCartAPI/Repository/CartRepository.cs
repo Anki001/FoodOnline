@@ -18,6 +18,28 @@ namespace FoodOnline.Services.ShopingCartAPI.Repository
             _mapper = mapper;
         }
 
+        public async Task<bool> ApplyCouponeAsync(string userId, string couponCode)
+        {
+            var cartFromDb = await _dbContext.CartHeaders.FirstOrDefaultAsync(x => x.UserId == userId);
+            if (cartFromDb is null) return false;
+
+            cartFromDb.CouponCode = couponCode;
+            _dbContext.CartHeaders.Update(cartFromDb);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> RemoveCouponAsync(string userId)
+        {
+            var cartFromDb = await _dbContext.CartHeaders.FirstOrDefaultAsync(x => x.UserId == userId);
+            if (cartFromDb is null) return false;
+
+            cartFromDb.CouponCode = string.Empty;
+            _dbContext.CartHeaders.Update(cartFromDb);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<bool> ClearCartAsync(string userId)
         {
             try

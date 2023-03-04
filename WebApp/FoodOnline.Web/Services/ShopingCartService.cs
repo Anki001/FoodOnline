@@ -26,6 +26,28 @@ namespace FoodOnline.Web.Services
             });
         }
 
+        public async Task<T> ApplyCouponAsync<T>(CartDto cartDto, string token = null)
+        {
+            return await SendAsync<T>(new ApiRequest
+            {
+                ApiType = ApiType.POST,
+                Data = cartDto,
+                Url = Constants.ShopingCartAPIBase + "/api/cart/ApplyCoupon",
+                AccessToken = token
+            });
+        }
+
+        public async Task<T> RemoveCouponAsync<T>(string userId, string token = null)
+        {
+            return await SendAsync<T>(new ApiRequest
+            {
+                ApiType = ApiType.POST,
+                Data = userId,
+                Url = Constants.ShopingCartAPIBase + "/api/cart/RemoveCoupon",
+                AccessToken = token
+            });
+        }
+
         public async Task<T> GetCartByUserIdAsync<T>(string userId, string token = null)
         {
             return await SendAsync<T>(new ApiRequest
@@ -34,7 +56,7 @@ namespace FoodOnline.Web.Services
                 Url = Constants.ShopingCartAPIBase + "/api/cart/GetCart/" + userId,
                 AccessToken = token
             });
-        }
+        }        
 
         public async Task<T> RemoveFromCartAsync<T>(int cartId, string token = null)
         {
