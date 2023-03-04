@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodOnline.Services.Product
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodOnline.Services.Identity", "Services\FoodOnline.Services.Identity\FoodOnline.Services.Identity.csproj", "{B084F019-1520-4F90-A16D-64CE1928316A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodOnline.Services.ShopingCartAPI", "FoodOnline.Services.ShopingCartAPI\FoodOnline.Services.ShopingCartAPI.csproj", "{49E1A2FA-5144-42F4-877D-7E2A7984F961}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodOnline.Services.CouponAPI", "Services\FoodOnline.Services.CouponAPI\FoodOnline.Services.CouponAPI.csproj", "{E78E2DE6-757D-4F48-8F2B-8897D1EAB203}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodOnline.Services.CouponAPI", "FoodOnline.Services.CouponAPI\FoodOnline.Services.CouponAPI.csproj", "{E577BFC2-D447-4FC0-9A8F-4FED6CBDA71D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodOnline.Services.ShopingCartAPI", "Services\FoodOnline.Services.ShopingCartAPI\FoodOnline.Services.ShopingCartAPI.csproj", "{F6FE345B-BFCF-4897-A794-7711B606816E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,14 +35,14 @@ Global
 		{B084F019-1520-4F90-A16D-64CE1928316A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B084F019-1520-4F90-A16D-64CE1928316A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B084F019-1520-4F90-A16D-64CE1928316A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49E1A2FA-5144-42F4-877D-7E2A7984F961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49E1A2FA-5144-42F4-877D-7E2A7984F961}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49E1A2FA-5144-42F4-877D-7E2A7984F961}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49E1A2FA-5144-42F4-877D-7E2A7984F961}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E577BFC2-D447-4FC0-9A8F-4FED6CBDA71D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E577BFC2-D447-4FC0-9A8F-4FED6CBDA71D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E577BFC2-D447-4FC0-9A8F-4FED6CBDA71D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E577BFC2-D447-4FC0-9A8F-4FED6CBDA71D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E78E2DE6-757D-4F48-8F2B-8897D1EAB203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E78E2DE6-757D-4F48-8F2B-8897D1EAB203}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E78E2DE6-757D-4F48-8F2B-8897D1EAB203}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E78E2DE6-757D-4F48-8F2B-8897D1EAB203}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6FE345B-BFCF-4897-A794-7711B606816E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6FE345B-BFCF-4897-A794-7711B606816E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6FE345B-BFCF-4897-A794-7711B606816E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6FE345B-BFCF-4897-A794-7711B606816E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,8 +51,8 @@ Global
 		{28DA80DD-EA04-44FF-BA99-0BDEEDC9801C} = {E0737A42-D44E-4DEF-A5E4-EFB4C3126F83}
 		{83960C14-2D1D-4E6A-8DFF-3700A8ADACEB} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
 		{B084F019-1520-4F90-A16D-64CE1928316A} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
-		{49E1A2FA-5144-42F4-877D-7E2A7984F961} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
-		{E577BFC2-D447-4FC0-9A8F-4FED6CBDA71D} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
+		{E78E2DE6-757D-4F48-8F2B-8897D1EAB203} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
+		{F6FE345B-BFCF-4897-A794-7711B606816E} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3F3DE7A-EEA5-4CA6-9C8C-518202D636FE}
