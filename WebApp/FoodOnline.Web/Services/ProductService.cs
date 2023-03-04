@@ -21,7 +21,7 @@ namespace FoodOnline.Web.Services
             {
                 ApiType = ApiType.POST,
                 Data = product,
-                Url = Constants.ProductAPIBase + "/api/products",
+                Url = Constants.ProductApiBase + "/api/products",
                 AccessToken = token
             });
         }
@@ -31,7 +31,7 @@ namespace FoodOnline.Web.Services
             return await SendAsync<T>(new ApiRequest
             {
                 ApiType = ApiType.DELETE,
-                Url = Constants.ProductAPIBase + "/api/products/" + productId,
+                Url = Constants.ProductApiBase + "/api/products/" + productId,
                 AccessToken = token
             });
         }
@@ -41,7 +41,7 @@ namespace FoodOnline.Web.Services
             return await SendAsync<T>(new ApiRequest
             {
                 ApiType = ApiType.GET,
-                Url = Constants.ProductAPIBase + "/api/products",
+                Url = Constants.ProductApiBase + "/api/products",
                 AccessToken = token
             });
         }
@@ -51,7 +51,7 @@ namespace FoodOnline.Web.Services
             return await SendAsync<T>(new ApiRequest
             {
                 ApiType = ApiType.GET,
-                Url = Constants.ProductAPIBase + "/api/products/" + productId,
+                Url = Constants.ProductApiBase + "/api/products/" + productId,
                 AccessToken = token
             });
         }
@@ -62,7 +62,7 @@ namespace FoodOnline.Web.Services
             {
                 ApiType = ApiType.PUT,
                 Data = product,
-                Url = Constants.ProductAPIBase + "/api/products",
+                Url = Constants.ProductApiBase + "/api/products",
                 AccessToken = token
             });
         }

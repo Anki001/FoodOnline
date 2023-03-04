@@ -21,7 +21,7 @@ namespace FoodOnline.Web.Services
             {
                 ApiType = ApiType.POST,
                 Data = cartDto,
-                Url = Constants.ShopingCartAPIBase + "/api/cart/AddCart",
+                Url = Constants.ShopingCartApiBase + "/api/cart/AddCart",
                 AccessToken = token
             });
         }
@@ -32,7 +32,7 @@ namespace FoodOnline.Web.Services
             {
                 ApiType = ApiType.POST,
                 Data = cartDto,
-                Url = Constants.ShopingCartAPIBase + "/api/cart/ApplyCoupon",
+                Url = Constants.ShopingCartApiBase + "/api/cart/ApplyCoupon",
                 AccessToken = token
             });
         }
@@ -43,7 +43,7 @@ namespace FoodOnline.Web.Services
             {
                 ApiType = ApiType.POST,
                 Data = userId,
-                Url = Constants.ShopingCartAPIBase + "/api/cart/RemoveCoupon",
+                Url = Constants.ShopingCartApiBase + "/api/cart/RemoveCoupon",
                 AccessToken = token
             });
         }
@@ -53,7 +53,7 @@ namespace FoodOnline.Web.Services
             return await SendAsync<T>(new ApiRequest
             {
                 ApiType = ApiType.GET,
-                Url = Constants.ShopingCartAPIBase + "/api/cart/GetCart/" + userId,
+                Url = Constants.ShopingCartApiBase + "/api/cart/GetCart/" + userId,
                 AccessToken = token
             });
         }        
@@ -64,7 +64,7 @@ namespace FoodOnline.Web.Services
             {
                 ApiType = ApiType.POST,
                 Data = cartId,
-                Url = Constants.ShopingCartAPIBase + "/api/cart/RemoveCart",
+                Url = Constants.ShopingCartApiBase + "/api/cart/RemoveCart",
                 AccessToken = token
             });
         }
@@ -75,7 +75,7 @@ namespace FoodOnline.Web.Services
             {
                 ApiType = ApiType.POST,
                 Data = cartDto,
-                Url = Constants.ShopingCartAPIBase + "/api/cart/UpdateCart",
+                Url = Constants.ShopingCartApiBase + "/api/cart/UpdateCart",
                 AccessToken = token
             });
         }

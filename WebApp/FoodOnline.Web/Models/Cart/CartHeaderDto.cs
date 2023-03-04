@@ -1,6 +1,8 @@
-﻿namespace FoodOnline.Web.Models.Cart
+﻿using FoodOnline.Web.Models.Orders;
+
+namespace FoodOnline.Web.Models.Cart
 {
-    public class CartHeaderDto
+    public class CartHeaderDto : OrderHeaderDto
     {
         public int CartHeaderId { get; set; }
         public string UserId { get; set; }

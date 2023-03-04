@@ -1,8 +1,10 @@
 ﻿using FoodOnline.Web.Models;
 using FoodOnline.Web.Models.Cart;
+using FoodOnline.Web.Models.Coupon;
 using FoodOnline.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
 namespace FoodOnline.Web.Controllers
@@ -11,12 +13,14 @@ namespace FoodOnline.Web.Controllers
     {
         private readonly IProductService _productService;
         private readonly IShopingCartService _shopingCartService;
-
+        private readonly ICouponService _couponService;
         public CartController(IProductService productService,
-            IShopingCartService shopingCartService)
+            IShopingCartService shopingCartService,
+            ICouponService couponService)
         {
             _productService = productService;
             _shopingCartService = shopingCartService;
+            _couponService = couponService;
         }
 
         public async Task<IActionResult> CartIndex()
@@ -76,10 +80,21 @@ namespace FoodOnline.Web.Controllers
 
             if (cartDto.CartHeader is not null)
             {
+                if (!string.IsNullOrEmpty(cartDto.CartHeader.CouponCode))
+                {
+                    var couponDetails = await _couponService.GetCouponDetailsAsync<ResponseDto>(cartDto.CartHeader.CouponCode, accessToken);
+
+                    if (couponDetails is not null && couponDetails.IsSuccess)
+                    {
+                        var couponDto = JsonConvert.DeserializeObject<CouponDto>(Convert.ToString(couponDetails.Result));
+                        cartDto.CartHeader.DiscountTotal = couponDto.DiscountAmount;
+                    }
+                }
                 foreach (var details in cartDto.CartDetails)
                 {
                     cartDto.CartHeader.OrderTotal += details.Product.Price * details.Count;
                 }
+                cartDto.CartHeader.OrderTotal -= cartDto.CartHeader.DiscountTotal;
             }
 
             return cartDto;
