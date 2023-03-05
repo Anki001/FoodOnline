@@ -1,4 +1,6 @@
 using AutoMapper;
+using FoodOnline.MessageBus;
+using FoodOnline.MessageBus.Interfaces;
 using FoodOnline.Services.ShopingCartAPI;
 using FoodOnline.Services.ShopingCartAPI.DBContexts;
 using FoodOnline.Services.ShopingCartAPI.Repository;
@@ -18,6 +20,7 @@ IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddSingleton<IMessageBus, AzureServiceMessageBus>();
 
 builder.Services.AddControllers();
 

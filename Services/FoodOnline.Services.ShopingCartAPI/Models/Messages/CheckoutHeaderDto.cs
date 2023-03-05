@@ -1,8 +1,9 @@
-﻿using FoodOnline.Services.ShopingCartAPI.Models.Dtos;
+﻿using FoodOnline.MessageBus;
+using FoodOnline.Services.ShopingCartAPI.Models.Dtos;
 
 namespace FoodOnline.Services.ShopingCartAPI.Models.Messages
 {
-    public class CheckoutHeaderDto
+    public class CheckoutHeaderDto : BaseMessage
     {
         public int CartHeaderId { get; set; }
         public string UserId { get; set; }

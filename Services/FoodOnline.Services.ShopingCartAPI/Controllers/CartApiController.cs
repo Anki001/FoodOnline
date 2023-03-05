@@ -1,8 +1,10 @@
 ﻿using Azure;
+using FoodOnline.MessageBus.Interfaces;
 using FoodOnline.Services.ShopingCartAPI.Models.Dtos;
 using FoodOnline.Services.ShopingCartAPI.Models.Messages;
 using FoodOnline.Services.ShopingCartAPI.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace FoodOnline.Services.ShopingCartAPI.Controllers
 {
@@ -11,11 +13,17 @@ namespace FoodOnline.Services.ShopingCartAPI.Controllers
     public class CartApiController : Controller
     {
         private readonly ICartRepository _cartRepository;
+        private readonly IMessageBus _messageBus;
+        private readonly IConfiguration _configuration;
         protected ResponseDto _response;
 
-        public CartApiController(ICartRepository cartRepository)
+        public CartApiController(ICartRepository cartRepository,
+            IMessageBus messageBus,
+            IConfiguration configuration)
         {
             _cartRepository = cartRepository;
+            _messageBus = messageBus;
+            _configuration = configuration;
             _response = new ResponseDto();
         }
 
@@ -88,7 +96,7 @@ namespace FoodOnline.Services.ShopingCartAPI.Controllers
         {
             try
             {
-                var isCouponApply = await _cartRepository.ApplyCouponeAsync(cartDto.CartHeader.UserId, 
+                var isCouponApply = await _cartRepository.ApplyCouponeAsync(cartDto.CartHeader.UserId,
                     cartDto.CartHeader.CouponCode);
 
                 _response.Result = isCouponApply;
@@ -128,6 +136,8 @@ namespace FoodOnline.Services.ShopingCartAPI.Controllers
 
                 checkoutHeader.CartDetails = cartDto.CartDetails;
                 //logic to add message to process order
+                var checkoutTopicName = _configuration.GetValue<string>("Azure:ServiceBus:CheckoutTopic");
+                await _messageBus.PublishMessageAsync(checkoutHeader, checkoutTopicName);
 
             }
             catch (Exception ex)
