@@ -66,6 +66,11 @@ namespace FoodOnline.Web.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Checkout()
+        {
+            return View(await GetCartDtoForLoggedinUser());
+        }
+
         private async Task<CartDto> GetCartDtoForLoggedinUser()
         {
             var userId = User.Claims.Where(x => x.Type == "sub").FirstOrDefault()?.Value;
