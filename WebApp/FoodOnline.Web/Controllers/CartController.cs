@@ -71,6 +71,27 @@ namespace FoodOnline.Web.Controllers
             return View(await GetCartDtoForLoggedinUser());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Checkout(CartDto cartDto)
+        {
+            try
+            {
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _shopingCartService.CheckoutAsync<ResponseDto>(cartDto.CartHeader, accessToken);
+                
+                return RedirectToAction(nameof(Confirmation));
+            }
+            catch (Exception ex)
+            {
+                return View(cartDto);
+            }
+        }
+        
+        public async Task<IActionResult> Confirmation()
+        {
+            return View();
+        }
+        
         private async Task<CartDto> GetCartDtoForLoggedinUser()
         {
             var userId = User.Claims.Where(x => x.Type == "sub").FirstOrDefault()?.Value;

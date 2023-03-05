@@ -1,5 +1,6 @@
 ﻿using Azure;
 using FoodOnline.Services.ShopingCartAPI.Models.Dtos;
+using FoodOnline.Services.ShopingCartAPI.Models.Messages;
 using FoodOnline.Services.ShopingCartAPI.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -116,5 +117,25 @@ namespace FoodOnline.Services.ShopingCartAPI.Controllers
             return _response;
         }
 
+        [HttpPost("Checkout")]
+        public async Task<object> Checkout(CheckoutHeaderDto checkoutHeader)
+        {
+            try
+            {
+                CartDto cartDto = await _cartRepository.GetCartByUserIdAsync(checkoutHeader.UserId);
+                if (cartDto is null)
+                    return BadRequest();
+
+                checkoutHeader.CartDetails = cartDto.CartDetails;
+                //logic to add message to process order
+
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string> { ex.ToString() };
+            }
+            return _response;
+        }
     }
 }

@@ -79,5 +79,16 @@ namespace FoodOnline.Web.Services
                 AccessToken = token
             });
         }
+
+        public async Task<T> CheckoutAsync<T>(CartHeaderDto cartHeader, string token = null)
+        {
+            return await SendAsync<T>(new ApiRequest
+            {
+                ApiType = ApiType.POST,
+                Data = cartHeader,
+                Url = Constants.ShopingCartApiBase + "/api/cart/Checkout",
+                AccessToken = token
+            });
+        }
     }
 }
