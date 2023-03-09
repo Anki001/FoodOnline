@@ -20,7 +20,10 @@ IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICouponRepository, CouponRepository>();
 builder.Services.AddSingleton<IMessageBus, AzureServiceMessageBus>();
+
+builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(x => x.BaseAddress = new Uri(builder.Configuration["ServiceUrls:CouponService"]));
 
 builder.Services.AddControllers();
 

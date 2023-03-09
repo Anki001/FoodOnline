@@ -1,4 +1,4 @@
-﻿    using FoodOnline.Services.ShopingCartAPI.Models.Dtos;
+﻿using FoodOnline.Services.ShopingCartAPI.Models.Dtos;
 
 namespace FoodOnline.Services.ShopingCartAPI.Repository.Interfaces
 {

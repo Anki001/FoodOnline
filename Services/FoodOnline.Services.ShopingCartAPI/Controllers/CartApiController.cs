@@ -1,10 +1,9 @@
-﻿using Azure;
-using FoodOnline.MessageBus.Interfaces;
+﻿using FoodOnline.MessageBus.Interfaces;
 using FoodOnline.Services.ShopingCartAPI.Models.Dtos;
+using FoodOnline.Services.ShopingCartAPI.Models.Dtos.Coupon;
 using FoodOnline.Services.ShopingCartAPI.Models.Messages;
 using FoodOnline.Services.ShopingCartAPI.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace FoodOnline.Services.ShopingCartAPI.Controllers
 {
@@ -13,15 +12,19 @@ namespace FoodOnline.Services.ShopingCartAPI.Controllers
     public class CartApiController : Controller
     {
         private readonly ICartRepository _cartRepository;
+        private readonly ICouponRepository _couponRepository;
         private readonly IMessageBus _messageBus;
         private readonly IConfiguration _configuration;
+
         protected ResponseDto _response;
 
         public CartApiController(ICartRepository cartRepository,
+            ICouponRepository couponRepository,
             IMessageBus messageBus,
             IConfiguration configuration)
         {
             _cartRepository = cartRepository;
+            _couponRepository = couponRepository;
             _messageBus = messageBus;
             _configuration = configuration;
             _response = new ResponseDto();
@@ -134,11 +137,22 @@ namespace FoodOnline.Services.ShopingCartAPI.Controllers
                 if (cartDto is null)
                     return BadRequest();
 
+                if (!string.IsNullOrEmpty(checkoutHeader.CouponCode))
+                {
+                    CouponDto coupon = await _couponRepository.GetCouponAsync(checkoutHeader.CouponCode);
+                    if (checkoutHeader.DiscountTotal != coupon.DiscountAmount)
+                    {
+                        _response.IsSuccess = false;
+                        _response.ErrorMessages = new List<string> { "Coupon price has changed, please confirm" };
+                        _response.DisplayMessage = "Coupon price has changed, please confirm";
+                        return _response;
+                    }
+                }
+
                 checkoutHeader.CartDetails = cartDto.CartDetails;
                 //logic to add message to process order
                 var checkoutTopicName = _configuration.GetValue<string>("Azure:ServiceBus:CheckoutTopic");
                 await _messageBus.PublishMessageAsync(checkoutHeader, checkoutTopicName);
-
             }
             catch (Exception ex)
             {

@@ -120,6 +120,9 @@ namespace FoodOnline.Services.ShopingCartAPI.Repository
 
                     // Update the count / cart details
                     cart.CartDetails.FirstOrDefault().Count += cartDetailsFromDb.Count;
+                    cart.CartDetails.FirstOrDefault().CartDetailsId = cartDetailsFromDb.CartDetailsId;
+                    cart.CartDetails.FirstOrDefault().CartHeaderId = cartDetailsFromDb.CartHeaderId;
+
                     _dbContext.CartDetails.Update(cart.CartDetails.FirstOrDefault());
                     _dbContext.SaveChanges();
                 }
