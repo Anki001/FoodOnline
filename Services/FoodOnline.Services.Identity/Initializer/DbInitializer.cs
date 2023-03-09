@@ -1,11 +1,8 @@
 ﻿using FoodOnline.Services.Identity.Common;
-using FoodOnline.Services.Identity.DBContexts;
 using FoodOnline.Services.Identity.Initializer.Interfaces;
 using FoodOnline.Services.Identity.Models;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using System.Security.Claims;
 
 namespace FoodOnline.Services.Identity.Initializer

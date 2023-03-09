@@ -49,7 +49,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(setupAction =>
 {
-    setupAction.SwaggerDoc("v1", new OpenApiInfo { Title = "FoodOnline.Services.CouponAPI", Version = "v1" });
+    setupAction.SwaggerDoc("v1", new OpenApiInfo { Title = "FoodOnline.Services.OrderAPI", Version = "v1" });
     //setupAction.EnableAnnotations();
     setupAction.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
