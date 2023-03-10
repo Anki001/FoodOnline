@@ -151,8 +151,11 @@ namespace FoodOnline.Services.ShopingCartAPI.Controllers
 
                 checkoutHeader.CartDetails = cartDto.CartDetails;
                 //logic to add message to process order
-                var checkoutTopicName = _configuration.GetValue<string>("Azure:ServiceBus:CheckoutTopic");
-                await _messageBus.PublishMessageAsync(checkoutHeader, checkoutTopicName);
+                // var checkoutTopicName = _configuration.GetValue<string>("Azure:ServiceBus:CheckoutTopic");
+
+                // While creating the queue in Azure do check the option to Forward Message To topic and select the topic name
+                var checkoutQueueName = _configuration.GetValue<string>("Azure:ServiceBus:CheckoutQueue");                
+                await _messageBus.PublishMessageAsync(checkoutHeader, checkoutQueueName);
 
                 await _cartRepository.ClearCartAsync(checkoutHeader.UserId);
             }
