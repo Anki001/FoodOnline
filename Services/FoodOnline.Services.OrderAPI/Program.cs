@@ -1,4 +1,6 @@
 using AutoMapper;
+using FoodOnline.MessageBus;
+using FoodOnline.MessageBus.Interfaces;
 using FoodOnline.Services.OrderAPI;
 using FoodOnline.Services.OrderAPI.Extensions;
 using FoodOnline.Services.OrderAPI.Messaging;
@@ -24,6 +26,7 @@ var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddSingleton(new OrderRepository(optionBuilder.Options));
 builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
+builder.Services.AddSingleton<IMessageBus, AzureServiceMessageBus>();
 
 builder.Services.AddControllers();
 

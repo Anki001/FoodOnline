@@ -1,4 +1,5 @@
 ﻿using Azure.Messaging.ServiceBus;
+using FoodOnline.MessageBus.Interfaces;
 using FoodOnline.Services.OrderAPI.Messages;
 using FoodOnline.Services.OrderAPI.Messaging.Interfaces;
 using FoodOnline.Services.OrderAPI.Models;
@@ -8,26 +9,31 @@ using System.Text;
 
 namespace FoodOnline.Services.OrderAPI.Messaging
 {
-    public class AzureServiceBusConsumer: IAzureServiceBusConsumer
+    public class AzureServiceBusConsumer : IAzureServiceBusConsumer
     {
         private readonly OrderRepository _orderRepository;
         private readonly IConfiguration _configuration;
+        private readonly IMessageBus _messageBus;
 
         private readonly string _subscriptionCheckout;
         private readonly string _topicCheckoutMessage;
+        private readonly string _topicOrderPaymentProcess;
         private readonly string _serviceBusConnectionString;
 
         private ServiceBusProcessor _checkoutProcessor;
 
         public AzureServiceBusConsumer(OrderRepository orderRepository,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IMessageBus messageBus)
         {
             _orderRepository = orderRepository;
             _configuration = configuration;
+            _messageBus = messageBus;
 
-            _serviceBusConnectionString = _configuration.GetValue<string>("AzureServiceBus:ConnectionString");
-            _topicCheckoutMessage = _configuration.GetValue<string>("AzureServiceBus:TopicCheckoutMessage");
-            _subscriptionCheckout = _configuration.GetValue<string>("AzureServiceBus:SubscriptionCheckout");
+            _serviceBusConnectionString = _configuration.GetValue<string>("Azure:ServiceBus:ConnectionString");
+            _topicCheckoutMessage = _configuration.GetValue<string>("Azure:ServiceBus:TopicCheckoutMessage");
+            _subscriptionCheckout = _configuration.GetValue<string>("Azure:ServiceBus:SubscriptionCheckout");
+            _topicOrderPaymentProcess = _configuration.GetValue<string>("Azure:ServiceBus:TopicOrderPaymentProcess");
 
             var client = new ServiceBusClient(_serviceBusConnectionString);
 
@@ -93,6 +99,27 @@ namespace FoodOnline.Services.OrderAPI.Messaging
             }
 
             await _orderRepository.AddOrderAsync(orderHeader);
+
+            // Process Payment request
+            PaymentRequestMessage paymentRequestMessage = new()
+            {
+                Name = orderHeader.FirstName + " " + orderHeader.LastName,
+                CardNumber = orderHeader.CardNumber,
+                CVV = orderHeader.CardCVV,
+                ExpiryMonthYear = orderHeader.ExpiryMonthYear,
+                OrderId = orderHeader.OrderHeaderId,
+                OrderTotal = orderHeader.OrderTotal
+            };
+
+            try
+            {
+                await _messageBus.PublishMessageAsync(paymentRequestMessage, _topicOrderPaymentProcess);
+                await args.CompleteMessageAsync(args.Message);
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
         }
     }
 }
