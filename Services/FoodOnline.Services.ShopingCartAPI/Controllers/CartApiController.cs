@@ -153,6 +153,8 @@ namespace FoodOnline.Services.ShopingCartAPI.Controllers
                 //logic to add message to process order
                 var checkoutTopicName = _configuration.GetValue<string>("Azure:ServiceBus:CheckoutTopic");
                 await _messageBus.PublishMessageAsync(checkoutHeader, checkoutTopicName);
+
+                await _cartRepository.ClearCartAsync(checkoutHeader.UserId);
             }
             catch (Exception ex)
             {
