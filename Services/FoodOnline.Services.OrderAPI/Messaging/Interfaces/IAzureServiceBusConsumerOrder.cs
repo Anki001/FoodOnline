@@ -1,6 +1,6 @@
 ﻿namespace FoodOnline.Services.OrderAPI.Messaging.Interfaces
 {
-    public interface IAzureServiceBusConsumer
+    public interface IAzureServiceBusConsumerOrder
     {
         Task StartAsync();
         Task StopAsync();

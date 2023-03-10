@@ -9,7 +9,7 @@ using System.Text;
 
 namespace FoodOnline.Services.OrderAPI.Messaging
 {
-    public class AzureServiceBusConsumer : IAzureServiceBusConsumer
+    public class AzureServiceBusConsumerOrder : IAzureServiceBusConsumerOrder
     {
         private readonly OrderRepository _orderRepository;
         private readonly IConfiguration _configuration;
@@ -22,7 +22,7 @@ namespace FoodOnline.Services.OrderAPI.Messaging
 
         private ServiceBusProcessor _checkoutProcessor;
 
-        public AzureServiceBusConsumer(OrderRepository orderRepository,
+        public AzureServiceBusConsumerOrder(OrderRepository orderRepository,
             IConfiguration configuration,
             IMessageBus messageBus)
         {
