@@ -15,12 +15,14 @@ namespace FoodOnline.Services.OrderAPI.Messaging
         private readonly IConfiguration _configuration;
         private readonly IMessageBus _messageBus;
 
-        private readonly string _subscriptionCheckout;
+        private readonly string _subscriptionFoodOnline;
         private readonly string _topicCheckoutMessage;
         private readonly string _topicOrderPaymentProcess;
+        private readonly string _topicUpdatePaymentResult;
         private readonly string _serviceBusConnectionString;
 
         private ServiceBusProcessor _checkoutProcessor;
+        private ServiceBusProcessor _updatePaymentStatusProcessor;
 
         public AzureServiceBusConsumerOrder(OrderRepository orderRepository,
             IConfiguration configuration,
@@ -32,12 +34,14 @@ namespace FoodOnline.Services.OrderAPI.Messaging
 
             _serviceBusConnectionString = _configuration.GetValue<string>("Azure:ServiceBus:ConnectionString");
             _topicCheckoutMessage = _configuration.GetValue<string>("Azure:ServiceBus:TopicCheckoutMessage");
-            _subscriptionCheckout = _configuration.GetValue<string>("Azure:ServiceBus:SubscriptionCheckout");
+            _subscriptionFoodOnline = _configuration.GetValue<string>("Azure:ServiceBus:SubscriptionFoodOnline");
             _topicOrderPaymentProcess = _configuration.GetValue<string>("Azure:ServiceBus:TopicOrderPaymentProcess");
+            _topicUpdatePaymentResult = _configuration.GetValue<string>("Azure:ServiceBus:TopicUpdatePaymentResult");
 
             var client = new ServiceBusClient(_serviceBusConnectionString);
 
-            _checkoutProcessor = client.CreateProcessor(_topicCheckoutMessage, _subscriptionCheckout);
+            _checkoutProcessor = client.CreateProcessor(_topicCheckoutMessage, _subscriptionFoodOnline);
+            _updatePaymentStatusProcessor = client.CreateProcessor(_topicUpdatePaymentResult, _subscriptionFoodOnline);
         }
 
         public async Task StartAsync()
@@ -45,12 +49,19 @@ namespace FoodOnline.Services.OrderAPI.Messaging
             _checkoutProcessor.ProcessMessageAsync += OnCheckOutMessageReceivedAsync;
             _checkoutProcessor.ProcessErrorAsync += ErrorHandler;
             await _checkoutProcessor.StartProcessingAsync();
+
+            _updatePaymentStatusProcessor.ProcessMessageAsync += OnPaymentUpdateReceivedAsync;
+            _updatePaymentStatusProcessor.ProcessErrorAsync += ErrorHandler;
+            await _updatePaymentStatusProcessor.StartProcessingAsync();
         }
 
         public async Task StopAsync()
         {
             await _checkoutProcessor.StopProcessingAsync();
             await _checkoutProcessor.DisposeAsync();
+
+            await _updatePaymentStatusProcessor.StopProcessingAsync();
+            await _updatePaymentStatusProcessor.DisposeAsync();
         }
 
         private Task ErrorHandler(ProcessErrorEventArgs args)
@@ -116,10 +127,21 @@ namespace FoodOnline.Services.OrderAPI.Messaging
                 await _messageBus.PublishMessageAsync(paymentRequestMessage, _topicOrderPaymentProcess);
                 await args.CompleteMessageAsync(args.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }
+        }
+
+        private async Task OnPaymentUpdateReceivedAsync(ProcessMessageEventArgs args)
+        {
+            var message = args.Message;
+            var body = Encoding.UTF8.GetString(message.Body);
+
+            UpdatePaymentResultMessage paymentResultMessage = JsonConvert.DeserializeObject<UpdatePaymentResultMessage>(body);
+
+            await _orderRepository.UpdateOrderPaymentStatusAsync(paymentResultMessage.OrderId, paymentResultMessage.Status);
+            await args.CompleteMessageAsync(args.Message);
         }
     }
 }
