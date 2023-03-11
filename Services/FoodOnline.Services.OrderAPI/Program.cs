@@ -7,7 +7,7 @@ using FoodOnline.Services.OrderAPI.Messaging;
 using FoodOnline.Services.OrderAPI.Messaging.Interfaces;
 using FoodOnline.Services.OrderAPI.Repository;
 using FoodOnline.Services.OrderAPI.Repository.Interfaces;
-using FoodOnline.Services.ShopingOrderAPI.DBContexts;
+using FoodOnline.Services.OrderAPI.DBContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;

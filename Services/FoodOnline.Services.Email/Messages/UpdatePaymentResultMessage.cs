@@ -1,4 +1,4 @@
-﻿namespace FoodOnline.Services.OrderAPI.Messages
+﻿namespace FoodOnline.Services.Email.Messages
 {
     public class UpdatePaymentResultMessage
     {

@@ -121,7 +121,8 @@ namespace FoodOnline.Services.OrderAPI.Messaging
                 CVV = orderHeader.CardCVV,
                 ExpiryMonthYear = orderHeader.ExpiryMonthYear,
                 OrderId = orderHeader.OrderHeaderId,
-                OrderTotal = orderHeader.OrderTotal
+                OrderTotal = orderHeader.OrderTotal,
+                Email= orderHeader.Email,
             };
 
             try

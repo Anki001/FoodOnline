@@ -9,12 +9,12 @@ using System.Text;
 namespace FoodOnline.Services.PaymentAPI.Messaging
 {
     public class AzureServiceBusConsumerPayment : IAzureServiceBusConsumerPayment
-    {        
+    {
         private readonly IConfiguration _configuration;
         private readonly IMessageBus _messageBus;
         private readonly IProcessPayment _processPayment;
 
-        private readonly string _subscriptionOrderPayment;        
+        private readonly string _subscriptionOrderPayment;
         private readonly string _topicOrderPaymentProcess;
         private readonly string _topicUpdatePaymentResult;
         private readonly string _serviceBusConnectionString;
@@ -24,12 +24,12 @@ namespace FoodOnline.Services.PaymentAPI.Messaging
         public AzureServiceBusConsumerPayment(IConfiguration configuration,
             IMessageBus messageBus,
             IProcessPayment processPayment)
-        {            
+        {
             _configuration = configuration;
             _messageBus = messageBus;
-            _processPayment= processPayment;
+            _processPayment = processPayment;
 
-            _serviceBusConnectionString = _configuration.GetValue<string>("Azure:ServiceBus:ConnectionString");            
+            _serviceBusConnectionString = _configuration.GetValue<string>("Azure:ServiceBus:ConnectionString");
             _subscriptionOrderPayment = _configuration.GetValue<string>("Azure:ServiceBus:SubscriptionOrderPaymentProcess");
             _topicOrderPaymentProcess = _configuration.GetValue<string>("Azure:ServiceBus:TopicOrderPaymentProcess");
             _topicUpdatePaymentResult = _configuration.GetValue<string>("Azure:ServiceBus:TopicUpdatePaymentResult");
@@ -70,15 +70,16 @@ namespace FoodOnline.Services.PaymentAPI.Messaging
             UpdatePaymentResultMessage updatePaymentResultMessage = new()
             {
                 Status = result,
-                OrderId = paymentrequestMessage.OrderId
-            };            
+                OrderId = paymentrequestMessage.OrderId,
+                Email = paymentrequestMessage.Email
+            };
 
             try
             {
                 await _messageBus.PublishMessageAsync(updatePaymentResultMessage, _topicUpdatePaymentResult);
                 await args.CompleteMessageAsync(args.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw;
             }

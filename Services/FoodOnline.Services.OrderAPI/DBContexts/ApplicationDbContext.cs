@@ -1,7 +1,7 @@
 ﻿using FoodOnline.Services.OrderAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FoodOnline.Services.ShopingOrderAPI.DBContexts
+namespace FoodOnline.Services.OrderAPI.DBContexts
 {
     public class ApplicationDbContext : DbContext
     {

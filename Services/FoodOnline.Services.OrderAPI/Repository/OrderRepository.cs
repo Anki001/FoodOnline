@@ -1,6 +1,6 @@
 ﻿using FoodOnline.Services.OrderAPI.Models;
 using FoodOnline.Services.OrderAPI.Repository.Interfaces;
-using FoodOnline.Services.ShopingOrderAPI.DBContexts;
+using FoodOnline.Services.OrderAPI.DBContexts;
 using Microsoft.EntityFrameworkCore;
 
 namespace FoodOnline.Services.OrderAPI.Repository
