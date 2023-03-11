@@ -31,6 +31,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoodOnline.Services.Payment
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodOnline.Services.Email", "Services\FoodOnline.Services.Email\FoodOnline.Services.Email.csproj", "{6D3C05A0-E040-41D2-A516-F5B02E737F57}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{7C0BB829-DF81-447A-93B6-40D8CFCAAF3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodOnline.GatewaySolution", "Gateway\FoodOnline.GatewaySolution\FoodOnline.GatewaySolution.csproj", "{CBAED5E3-CDB5-4FBD-BA06-B3B00A95B9FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,10 @@ Global
 		{6D3C05A0-E040-41D2-A516-F5B02E737F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D3C05A0-E040-41D2-A516-F5B02E737F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D3C05A0-E040-41D2-A516-F5B02E737F57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBAED5E3-CDB5-4FBD-BA06-B3B00A95B9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBAED5E3-CDB5-4FBD-BA06-B3B00A95B9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBAED5E3-CDB5-4FBD-BA06-B3B00A95B9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBAED5E3-CDB5-4FBD-BA06-B3B00A95B9FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +100,7 @@ Global
 		{1E4600AB-46A2-46D2-BAC5-79F8764A6FD0} = {40EE2560-D0A1-4044-840E-FD4B354BBEA8}
 		{34AFADF3-D328-488D-ABD1-0AC60A9A97D1} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
 		{6D3C05A0-E040-41D2-A516-F5B02E737F57} = {6F895442-3C47-4658-AA7A-C4801EF2DD10}
+		{CBAED5E3-CDB5-4FBD-BA06-B3B00A95B9FB} = {7C0BB829-DF81-447A-93B6-40D8CFCAAF3B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D3F3DE7A-EEA5-4CA6-9C8C-518202D636FE}
