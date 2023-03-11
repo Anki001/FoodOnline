@@ -33,10 +33,9 @@ namespace FoodOnline.Services.OrderAPI.Messaging
             _configuration = configuration;
             _messageBus = messageBus;
 
-            _serviceBusConnectionString = _configuration.GetValue<string>("Azure:ServiceBus:ConnectionString");
-            //_topicCheckoutMessage = _configuration.GetValue<string>("Azure:ServiceBus:TopicCheckoutMessage");
+            _serviceBusConnectionString = _configuration.GetValue<string>("Azure:ServiceBus:ConnectionString");            
             _queueCheckoutMessage = _configuration.GetValue<string>("Azure:ServiceBus:QueueCheckoutMessage");            
-            //_subscriptionFoodOnline = _configuration.GetValue<string>("Azure:ServiceBus:SubscriptionFoodOnline");
+            _subscriptionFoodOnline = _configuration.GetValue<string>("Azure:ServiceBus:SubscriptionFoodOnline");
             _topicOrderPaymentProcess = _configuration.GetValue<string>("Azure:ServiceBus:TopicOrderPaymentProcess");
             _topicUpdatePaymentResult = _configuration.GetValue<string>("Azure:ServiceBus:TopicUpdatePaymentResult");
 
