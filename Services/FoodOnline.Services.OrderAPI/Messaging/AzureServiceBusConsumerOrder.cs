@@ -16,7 +16,8 @@ namespace FoodOnline.Services.OrderAPI.Messaging
         private readonly IMessageBus _messageBus;
 
         private readonly string _subscriptionFoodOnline;
-        private readonly string _topicCheckoutMessage;
+        //private readonly string _topicCheckoutMessage;
+        private readonly string _queueCheckoutMessage;
         private readonly string _topicOrderPaymentProcess;
         private readonly string _topicUpdatePaymentResult;
         private readonly string _serviceBusConnectionString;
@@ -33,14 +34,15 @@ namespace FoodOnline.Services.OrderAPI.Messaging
             _messageBus = messageBus;
 
             _serviceBusConnectionString = _configuration.GetValue<string>("Azure:ServiceBus:ConnectionString");
-            _topicCheckoutMessage = _configuration.GetValue<string>("Azure:ServiceBus:TopicCheckoutMessage");
-            _subscriptionFoodOnline = _configuration.GetValue<string>("Azure:ServiceBus:SubscriptionFoodOnline");
+            //_topicCheckoutMessage = _configuration.GetValue<string>("Azure:ServiceBus:TopicCheckoutMessage");
+            _queueCheckoutMessage = _configuration.GetValue<string>("Azure:ServiceBus:QueueCheckoutMessage");            
+            //_subscriptionFoodOnline = _configuration.GetValue<string>("Azure:ServiceBus:SubscriptionFoodOnline");
             _topicOrderPaymentProcess = _configuration.GetValue<string>("Azure:ServiceBus:TopicOrderPaymentProcess");
             _topicUpdatePaymentResult = _configuration.GetValue<string>("Azure:ServiceBus:TopicUpdatePaymentResult");
 
             var client = new ServiceBusClient(_serviceBusConnectionString);
 
-            _checkoutProcessor = client.CreateProcessor(_topicCheckoutMessage, _subscriptionFoodOnline);
+            _checkoutProcessor = client.CreateProcessor(_queueCheckoutMessage);
             _updatePaymentStatusProcessor = client.CreateProcessor(_topicUpdatePaymentResult, _subscriptionFoodOnline);
         }
 
