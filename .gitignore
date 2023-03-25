@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/identitys/mvc
+/Services/FoodOnline.Services.Identity/keys/is-signing-key-35931B4CCE24C1B6FCD91F23594FD24D.json
